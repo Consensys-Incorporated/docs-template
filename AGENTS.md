@@ -48,7 +48,6 @@ this template, customize these to match your site:
 | `llms.txt` and `llms-full.txt` generation | `docusaurus.config.js` → `docusaurus-plugin-llms` config | Update `title` and `description` |
 | Copy-page-as-markdown button | `docusaurus.config.js` → `docusaurus-plugin-copy-page-button` | No changes needed |
 | Raw markdown at `.md` URLs | `scripts/copy-md-to-build.js` | Update `SITE_URL` constant or set `SITE_URL` env var |
-| AI-facing root index | `static/index.md` | Replace with your product description and links |
 | AI crawler permissions | `static/robots.txt` | Update sitemap URL |
 | Vercel HTTP headers (Link, Content-Type) | `vercel.json` `headers` | No changes needed |
 | Vercel markdown rewrites | `vercel.json` `rewrites` | No changes needed |

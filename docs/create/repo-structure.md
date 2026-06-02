@@ -130,6 +130,7 @@ this folder, and it will be rendered with the file name as the path.
 Routing is file-based for any `.js` and `.tsx` file.
 
 ### 📁 `theme` folder
+
 Contains [swizzled](https://docusaurus.io/docs/swizzling) Docusaurus theme components — local
 overrides that replace or wrap the default theme implementation.
 
@@ -146,19 +147,8 @@ static
 │   ├── favicon.ico
 │   ├── logo.svg
 │   └── logo_dark.svg
-├── index.md
 └── robots.txt
 ```
-
-#### 📄 `index.md`
-
-An AI-facing Markdown entry point served at the root of your site (`/index.md`).
-It provides a plain-text product overview and links to the agent-readable resources
-(`/llms.txt`, `/llms-full.txt`, `/sitemap.xml`) that AI agents use to discover and navigate
-your documentation.
-
-Update this file with your product name, a short description, and links to key sections before
-publishing.
 
 #### 📄 `robots.txt`
 

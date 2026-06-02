@@ -100,19 +100,6 @@ includeOrder: [
 ],
 ```
 
-### Update `static/index.md`
-
-`static/index.md` is served at `/index.md` and acts as the AI-facing entry point for your site.
-Replace the placeholder content with:
-
-- Your product name and a two- or three-sentence description.
-- Links to the most important sections of your documentation.
-- Links to the agent-readable resources (`/llms.txt`, `/llms-full.txt`, `/sitemap.xml`).
-
-Keep the file concise.
-An agent fetching `/index.md` should be able to orient itself and decide where to look next
-within a few hundred tokens.
-
 ### Update `static/robots.txt`
 
 Replace the placeholder `Sitemap:` URL with your deployed site's sitemap URL:
