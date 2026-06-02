@@ -13,6 +13,12 @@ This page describes the function of each file in your new doc site, based on
 
 ```text title="Folder structure"
 .github
+├── ISSUE_TEMPLATE
+│   ├── config.yml
+│   ├── fix-content.yml
+│   ├── new-content.yml
+│   └── site.yml
+├── PULL_REQUEST_TEMPLATE.md
 └── workflows
     ├── algolia-search-scraper.yml
     ├── build.yml
@@ -24,6 +30,14 @@ This page describes the function of each file in your new doc site, based on
     ├── spelling.yml
     └── trivy.yaml
 ```
+
+### 📄 `PULL_REQUEST_TEMPLATE.md`
+
+Template pre-filled in every new pull request.
+
+### 📁 `ISSUE_TEMPLATE` folder
+
+Contains GitHub issue forms that guide contributors when opening an issue.
 
 ### 📁 `workflows` folder
 
