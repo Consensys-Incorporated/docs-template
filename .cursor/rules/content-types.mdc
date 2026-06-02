@@ -1,0 +1,72 @@
+---
+description: Maps folder conventions to Diataxis content types so AI tools produce the right structure for each doc category.
+globs: ["**/*.md", "**/*.mdx"]
+alwaysApply: false
+---
+
+# Content types (Diataxis)
+
+> **Note for this repository:** `docs-template` itself is a guide and template site — its content
+> is organized by task (`contribute/`, `create/`, `configure/`) rather than by Diataxis type.
+> The conventions below do **not** apply to files in this repo.
+> They are recommended for any **product documentation site** created using this template.
+
+The [Diataxis framework](https://diataxis.fr/) organizes documentation by function. In a product
+docs site, the folder a file lives in determines the content type and structure expectations.
+
+## Folder-to-type mapping
+
+### `concepts/` - Explanation
+
+- Explain **why** something exists and **how** it works at a high level.
+- Provide context: design decisions, historical reasons, trade-offs, and alternatives.
+- Make connections to other parts of the system or to broader industry concepts.
+- Do not include step-by-step instructions. Link to related guides or quickstarts instead.
+- Keep explanation closely bounded. Do not let instructions or reference details creep in.
+
+### `how-to/` - How-to
+
+- Goal-oriented steps that help the reader achieve a specific outcome.
+- Title the page with the goal (for example, "Configure rate limits"), not a generic label.
+- State the goal in the first sentence or heading.
+- List prerequisites before the first step.
+- Number the steps. Each step should contain one action.
+- Assume the reader has basic knowledge of the product.
+- Omit the unnecessary. Practical usability matters more than completeness.
+- Do not digress into explanations or teaching. Link to concept pages instead.
+
+### `get-started/` - Onboarding
+
+`get-started/` pages are onboarding essentials: installation, system requirements, connecting
+to services, and initial configuration.
+
+Choose structure based on the topic (how-to steps, short explanation, or reference-style facts)
+and match conventions of neighboring pages in the same `get-started/` section.
+
+### `reference/` - Reference
+
+- Precise, complete, structured descriptions of APIs, CLI options, methods, and parameters.
+- Describe and only describe. Be austere, neutral, and factual.
+- Match the format used in surrounding reference pages.
+- Mirror the structure of the API or code itself (for example, one section per method or endpoint).
+- Include short usage examples to illustrate parameters and return values.
+- Keep explanatory prose to the minimum needed to use the API correctly.
+- Do not include tutorials or extended how-to steps.
+
+### `tutorials/` - Tutorial
+
+- Learning-oriented, reproducible, end-to-end walkthrough.
+- State what the reader will build or accomplish at the very start.
+- Do not assume the reader has prior knowledge of the subject or tools.
+- Deliver visible results early and often. Each step should produce output the reader can verify.
+- Show expected output (for example, "You should see `Connected`").
+- Ruthlessly minimize explanation. Keep the focus on doing, not theory. Link to concept pages for
+  deeper understanding.
+- Ignore options and alternatives. Guide the reader along a single path to a successful conclusion.
+- Provide a complete working configuration or code sample.
+- Aspire to perfect reliability. Test every step.
+
+## Frontmatter
+
+For required and optional documentation frontmatter (`description`, `keywords`, `sidebar_label`,
+`title` vs duplicate H1), see **Frontmatter** in `markdown-formatting.mdc`.
