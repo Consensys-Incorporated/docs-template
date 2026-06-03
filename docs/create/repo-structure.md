@@ -13,6 +13,12 @@ This page describes the function of each file in your new doc site, based on
 
 ```text title="Folder structure"
 .github
+├── ISSUE_TEMPLATE
+│   ├── config.yml
+│   ├── fix-content.yml
+│   ├── new-content.yml
+│   └── site.yml
+├── PULL_REQUEST_TEMPLATE.md
 └── workflows
     ├── algolia-search-scraper.yml
     ├── build.yml
@@ -24,6 +30,14 @@ This page describes the function of each file in your new doc site, based on
     ├── spelling.yml
     └── trivy.yaml
 ```
+
+### 📄 `PULL_REQUEST_TEMPLATE.md`
+
+Template pre-filled in every new pull request.
+
+### 📁 `ISSUE_TEMPLATE` folder
+
+Contains GitHub issue forms that guide contributors when opening an issue.
 
 ### 📁 `workflows` folder
 
@@ -74,6 +88,10 @@ Action that scans for vulnerabilities using [Trivy](https://trivy.dev/).
 Contains all the Markdown and related files for the [docs](https://docusaurus.io/docs/docs-introduction)
 functionality of Docusaurus.
 
+## 📁 `scripts` folder
+
+Contains Node.js scripts that run outside Docusaurus, typically as post-build steps.
+
 ## 📁 `src` folder
 
 Contains all the JSX and CSS files for the [pages](https://docusaurus.io/docs/creating-pages)
@@ -81,23 +99,16 @@ functionality of Docusaurus.
 
 ```text title="Folder structure"
 src
-├── components
-│   └── HomepageFeatures
-│       ├── index.tsx
-│       └── styles.module.css
 ├── css
 │   └── custom.css
-└── pages
-    ├── index.module.css
-    ├── index.tsx
-    └── markdown-page.md
+├── pages
+│   └── markdown-page.md
+└── theme
+    └── DocItem
+        └── Layout
+            ├── index.jsx
+            └── styles.module.css
 ```
-
-### 📁 `components` folder
-
-Contains JSX components for React.js which should live separately from the `pages` folder.
-JSX components are broken up here with `.tsx` extensions and accompanying scoped `.modules.css`.
-You can then import these components into files in the `pages` folder.
 
 ### 📁 `css` folder
 
@@ -118,6 +129,11 @@ You can still [add a Markdown page](https://docusaurus.io/docs/creating-pages#ad
 this folder, and it will be rendered with the file name as the path.
 Routing is file-based for any `.js` and `.tsx` file.
 
+### 📁 `theme` folder
+
+Contains [swizzled](https://docusaurus.io/docs/swizzling) Docusaurus theme components — local
+overrides that replace or wrap the default theme implementation.
+
 ## 📁 `static` folder
 
 Contains assets that can be directly copied on build output.
@@ -127,11 +143,67 @@ See how to [reference your static asset](https://docusaurus.io/docs/static-asset
 
 ```text title="Folder structure"
 static
-└── img
-    ├── favicon.ico
-    ├── logo.svg
-    └── logo_dark.svg
+├── img
+│   ├── favicon.ico
+│   ├── logo.svg
+│   └── logo_dark.svg
+└── robots.txt
 ```
+
+#### 📄 `robots.txt`
+
+Crawler permissions file.
+The template version explicitly allows all major AI crawlers (GPTBot, OAI-SearchBot,
+PerplexityBot, Google-Extended) and includes a `Content-Signal` header declaring that the
+content may be used for search indexing, model grounding, and AI training.
+
+Update the `Sitemap:` URL at the bottom to match your deployed site.
+
+## 📁 `.cursor` folder
+
+Contains AI coding assistant configuration for [Cursor](https://cursor.com).
+
+```text title="Folder structure"
+.cursor
+├── rules
+│   ├── content-types.mdc
+│   ├── contributor-workflow.mdc
+│   ├── editorial-voice.mdc
+│   ├── markdown-formatting.mdc
+│   └── terminology.mdc
+└── skills
+    ├── author-page
+    │   └── SKILL.md
+    └── style-review
+        └── SKILL.md
+```
+
+### 📁 `rules` folder
+
+Cursor rules are persistent instructions loaded automatically when you work on files matching
+their glob patterns.
+The template ships with five rules covering editorial voice, terminology, Markdown formatting,
+content types (Diataxis), and contributor workflow.
+
+Customize these rules to match your product's terminology, link conventions, and team workflow.
+
+### 📁 `skills` folder
+
+Cursor skills are on-demand instructions loaded when the task matches the skill description.
+The template ships with two skills:
+
+- **`author-page`** — scaffolds and drafts new documentation pages to editorial standards.
+- **`style-review`** — audits pages for voice, terminology, formatting, and content-type compliance
+  before a PR is submitted.
+
+## 📄 `AGENTS.md`
+
+Root-level context file read by AI coding agents (Cursor, Claude, etc.) when they open the
+repository.
+It describes the documentation areas, editorial standards, critical rules, and a lookup table of
+all AI-readiness features with the file to edit and what to customize per site.
+
+Update this file when you rename areas, add products, or change conventions.
 
 ## 📄 `.editorconfig`
 
@@ -223,4 +295,17 @@ project and is only for editor experience.
 
 ## 📄 `vercel.json`
 
-Vercel configuration file used for [server-side redirects](https://vercel.com/docs/redirects/configuration-redirects).
+Vercel configuration file.
+The template version includes three sections:
+
+- **`redirects`** — [server-side redirects](https://vercel.com/docs/redirects/configuration-redirects)
+  for moved or deleted pages.
+  Add an entry here whenever you rename or remove a page.
+- **`headers`** — HTTP response headers added to every response.
+  The template sets a `Link` header on `/` that advertises `/sitemap.xml`, `/llms.txt`, and
+  `/llms-full.txt` to crawlers and agents, and sets `Content-Type: text/markdown` on any URL
+  ending in `.md`.
+- **`rewrites`** — server-side rewrites that map requests with an `Accept: text/markdown` header
+  to the corresponding `.md` file in the build output.
+  This enables HTTP content negotiation so AI agents can retrieve Markdown by sending the
+  appropriate `Accept` header without knowing the `.md` URL in advance.

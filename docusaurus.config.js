@@ -14,9 +14,10 @@ const config = {
   baseUrl,
   onBrokenLinks: "throw",
   markdown: {
+    mermaid: true,
     hooks: {
       onBrokenMarkdownLinks: "throw",
-    }
+    },
   },
   favicon: "img/favicon.ico",
   trailingSlash: false,
@@ -278,6 +279,22 @@ const config = {
     //     },
     //   },
     // ],
+    [
+      "docusaurus-plugin-llms",
+      {
+        docsDir: "docs",
+        generateLLMsTxt: true,
+        generateLLMsFullTxt: true,
+        // TODO: Update title and description to match your site
+        title: "Consensys docs guide",
+        description:
+          "Official documentation for this Consensys developer product.",
+        excludeImports: true,
+        removeDuplicateHeadings: true,
+        logLevel: process.env.CI ? "quiet" : "normal",
+        ignoreFiles: ["assets/**", "img/**"],
+      },
+    ],
   ],
   themes: [
     [
@@ -288,6 +305,7 @@ const config = {
         indexBlog: false,
       },
     ],
+    "@docusaurus/theme-mermaid",
   ],
 };
 
